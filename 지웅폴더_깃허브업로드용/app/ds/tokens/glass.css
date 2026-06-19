@@ -1,0 +1,160 @@
+/* ==========================================================================
+   The Liquid Glass material — LiquidOS Glass
+   Everything is built from one primitive: .glass — a translucent layer that
+   blurs + saturates whatever is behind it. It MUST sit over a backdrop (the
+   wallpaper or .liquid-bg); glass on a flat fill looks dead.
+
+   What makes it read as glass, not just a blur:
+     • specular rim   — a bright inset highlight on the top edge
+     • saturation     — saturate(180%) so colour behind stays vivid
+     • soft shadow    — the blue-violet --shadow tokens ground it
+     • large radii    — continuous corners (--r-lg / --r-xl)
+   ========================================================================== */
+
+.glass {
+  position: relative;
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-rim);
+  border-radius: var(--r-lg);
+  box-shadow:
+    var(--shadow-2),
+    inset 0 1px 0 var(--glass-rim);          /* specular rim */
+  color: var(--fg-1);
+}
+
+/* Intensity scale — the system's main variation axis ---------------------- */
+.glass--thin {
+  background: var(--glass-fill-thin);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  backdrop-filter: blur(8px) saturate(160%);
+  box-shadow: var(--shadow-1), inset 0 1px 0 var(--glass-rim-soft);
+}
+.glass--thick {
+  background: var(--glass-fill-thick);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  backdrop-filter: blur(28px) saturate(190%);
+  box-shadow: var(--shadow-3), inset 0 1px 0 var(--glass-rim);
+}
+/* Chrome — toolbars / dock / nav: needs legibility, so more fill + tint ---- */
+.glass--chrome {
+  background: var(--glass-fill-chrome);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: var(--shadow-1), inset 0 1px 0 var(--glass-rim);
+}
+
+/* ---- Interactive glass card with mouse-tracking spotlight ---------------- */
+/* Set --mouse-x / --mouse-y from JS (px) for the highlight to follow cursor. */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-rim);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-2), inset 0 1px 0 var(--glass-rim);
+  transition: transform var(--dur-base) var(--ease-glass),
+              box-shadow var(--dur-base) var(--ease-glass),
+              background-color var(--dur-base) var(--ease-glass);
+}
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--dur-sheet) var(--ease-out);
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 0),
+    var(--glass-sheen), transparent 40%);
+}
+.glass-card:hover::before { opacity: 1; }
+.glass-card > * { position: relative; z-index: 2; }
+
+.glass-card--lift:hover {
+  transform: translateY(-2px);
+  background: var(--glass-fill-hover);
+  box-shadow: var(--shadow-3), inset 0 1px 0 var(--glass-rim);
+}
+
+/* ---- Pressable: dimensional press feedback ------------------------------ */
+.pressable {
+  transition: transform var(--dur-tap) var(--ease-spring),
+              box-shadow var(--dur-tap) var(--ease-glass);
+}
+.pressable:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  .pressable:active { transform: scale(0.98); }
+}
+
+/* ==========================================================================
+   .liquid-bg — the animated pastel "liquid" wallpaper.
+   Four large, blurred, organically morphing blobs drift behind the glass.
+   Place as the first child of a positioned, overflow-hidden container.
+   Override blob colour with the --blob-* vars to reskin the mood.
+   ========================================================================== */
+.liquid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--canvas);
+}
+.liquid-bg .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  opacity: 0.4;
+  will-change: transform, border-radius;
+}
+.liquid-bg .blob-1 {
+  width: 450px; height: 450px; top: 10%; left: 5%;
+  background: var(--blob-1, linear-gradient(45deg, #f9a8d4, #fecdd3, #fef3c7));
+  animation: blobFloat1 18s var(--ease-glass) infinite;
+}
+.liquid-bg .blob-2 {
+  width: 550px; height: 550px; bottom: 15%; right: 10%;
+  background: var(--blob-2, linear-gradient(135deg, #bae6fd, #7dd3fc, #e0e7ff));
+  opacity: 0.45;
+  animation: blobFloat2 22s var(--ease-glass) infinite;
+}
+.liquid-bg .blob-3 {
+  width: 400px; height: 400px; top: 45%; left: 40%;
+  background: var(--blob-3, linear-gradient(45deg, #ddd6fe, #f5d0fe, #f9a8d4));
+  opacity: 0.35;
+  animation: blobFloat3 20s var(--ease-glass) infinite;
+}
+.liquid-bg .blob-4 {
+  width: 350px; height: 350px; top: 5%; right: 25%;
+  background: var(--blob-4, linear-gradient(135deg, #d1fae5, #99f6e4, #bae6fd));
+  opacity: 0.3;
+  filter: blur(48px);
+  animation: blobSpin 25s linear infinite;
+}
+
+@keyframes blobFloat1 {
+  0%, 100% { transform: translate(0,0) scale(1); border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+  33% { transform: translate(50px, 80px) scale(1.15); border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%; }
+  66% { transform: translate(-30px, 40px) scale(0.9); border-radius: 30% 70% 30% 70% / 50% 60% 40% 50%; }
+}
+@keyframes blobFloat2 {
+  0%, 100% { transform: translate(0,0) scale(1); border-radius: 50% 50% 30% 70% / 50% 60% 40% 60%; }
+  50% { transform: translate(-60px, -50px) scale(1.2); border-radius: 30% 70% 70% 30% / 50% 30% 70% 50%; }
+}
+@keyframes blobFloat3 {
+  0%, 100% { transform: translate(0,0) scale(1); border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%; }
+  50% { transform: translate(70px, -30px) scale(0.85); border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; }
+}
+@keyframes blobSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.12); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .liquid-bg .blob { animation: none !important; }
+}

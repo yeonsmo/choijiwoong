@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Typography — LiquidOS Glass
+   Inter for Latin/UI, Noto Sans KR for 한국어 (both render in the same stack,
+   the browser picks per-glyph). Weight + size carry hierarchy — Korean has no
+   casing, so never rely on caps. Subtle negative tracking is the Apple-ish feel.
+   ========================================================================== */
+
+:root {
+  --font-sans: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; /* @kind font */
+
+  /* ---- Type scale (px) — display → caption ------------------------------ */
+  --text-display: 30px;  /* hero numerals, page H2 */
+  --text-h1:      24px;
+  --text-h2:      18px;
+  --text-h3:      16px;
+  --text-body:    14px;  /* default body */
+  --text-sm:      13px;  /* dense labels */
+  --text-label:   12px;  /* widget labels, captions */
+  --text-xs:      11px;  /* micro caption, deltas */
+  --text-2xs:     10px;  /* overlines, tags */
+
+  /* ---- Weights — weight does the work, esp. in Hangul ------------------- */
+  --w-light:    300; /* @kind other */
+  --w-regular:  400; /* @kind other */
+  --w-medium:   500; /* @kind other */
+  --w-semibold: 600; /* @kind other */
+  --w-bold:     700; /* @kind other */
+  --w-extra:    800; /* @kind other */
+
+  /* ---- Line height ------------------------------------------------------ */
+  --lh-tight:  1.15; /* @kind other */
+  --lh-snug:   1.3;  /* @kind other */
+  --lh-normal: 1.5;  /* @kind other */
+
+  /* ---- Tracking --------------------------------------------------------- */
+  --track-tight:   -0.02em;   /* headings / numerals @kind other */
+  --track-snug:    -0.01em;   /* body @kind other */
+  --track-normal:  0;         /* @kind other */
+  --track-wide:    0.06em;    /* overlines / uppercase eyebrows @kind other */
+}
+
+/* ---- Semantic type classes (optional helpers) --------------------------- */
+.t-display { font: var(--w-extra) var(--text-display)/var(--lh-tight) var(--font-sans); letter-spacing: var(--track-tight); color: var(--fg-1); }
+.t-h1      { font: var(--w-bold) var(--text-h1)/var(--lh-snug) var(--font-sans); letter-spacing: var(--track-tight); color: var(--fg-1); }
+.t-h2      { font: var(--w-bold) var(--text-h2)/var(--lh-snug) var(--font-sans); letter-spacing: var(--track-snug); color: var(--fg-1); }
+.t-h3      { font: var(--w-semibold) var(--text-h3)/var(--lh-snug) var(--font-sans); letter-spacing: var(--track-snug); color: var(--fg-1); }
+.t-body    { font: var(--w-regular) var(--text-body)/var(--lh-normal) var(--font-sans); letter-spacing: var(--track-snug); color: var(--fg-2); }
+.t-label   { font: var(--w-semibold) var(--text-label)/var(--lh-snug) var(--font-sans); letter-spacing: var(--track-snug); color: var(--fg-2); }
+.t-caption { font: var(--w-medium) var(--text-xs)/var(--lh-snug) var(--font-sans); color: var(--fg-3); }
+.t-overline{ font: var(--w-bold) var(--text-2xs)/1 var(--font-sans); letter-spacing: var(--track-wide); text-transform: uppercase; color: var(--fg-3); }
+.t-mono    { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.t-num     { font-variant-numeric: tabular-nums; letter-spacing: var(--track-tight); }

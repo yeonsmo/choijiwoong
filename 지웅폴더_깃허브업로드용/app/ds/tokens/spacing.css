@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Spacing, radii & elevation — LiquidOS Glass
+   4px base grid. Radii are large & continuous (squircle feel) — panels read as
+   polished tiles, never sharp cards. Elevation = soft blue-violet glass shadow
+   layered with the glass rim (defined in glass.css), not a hard drop shadow.
+   ========================================================================== */
+
+:root {
+  /* ---- Spacing scale (4px base) ----------------------------------------- */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* ---- Radii — large & continuous --------------------------------------- */
+  --r-xs:   8px;   /* chips, tags, tiny controls */
+  --r-sm:   12px;  /* buttons, inputs, list rows */
+  --r-md:   16px;  /* stat cards, dropdowns */
+  --r-lg:   20px;  /* widgets */
+  --r-xl:   24px;  /* hero panels, dialogs */
+  --r-2xl:  28px;  /* large sheets */
+  --r-pill: 999px; /* fully round */
+
+  /* ---- Elevation — the signature soft blue-violet glass shadow ----------- */
+  /* rgb is themed (light = 31,38,135 / dark = 0,0,0) via --glass-shadow-rgb */
+  --shadow-0: 0 1px 2px rgba(var(--glass-shadow-rgb), 0.04);
+  --shadow-1: 0 4px 20px rgba(var(--glass-shadow-rgb), 0.05);
+  --shadow-2: 0 10px 35px -10px rgba(var(--glass-shadow-rgb), 0.18);
+  --shadow-3: 0 24px 60px -18px rgba(var(--glass-shadow-rgb), 0.28);
+  --shadow-pop: 0 12px 40px -8px rgba(var(--glass-shadow-rgb), 0.22); /* dropdowns / toasts */
+}

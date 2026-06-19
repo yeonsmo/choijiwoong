@@ -1,0 +1,49 @@
+/* LiquidOS Glass design system — tokens + glass material (copied verbatim under app/ds). */
+@import "./ds/styles.css";
+
+/* ---- App-level base ------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  letter-spacing: var(--track-snug);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* 페이지 콘텐츠가 액체 배경 위에 항상 올라오도록 스태킹 컨텍스트 보장. */
+.app-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* 입력 포커스 링 — 단일 인디고 액센트. */
+input:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}

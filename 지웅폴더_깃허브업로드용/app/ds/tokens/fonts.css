@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Fonts — LiquidOS Glass
+   Latin UI + display: Inter. Korean (한국어): Noto Sans KR. Mono: system.
+   These are the real families used in the product build (loaded from Google
+   Fonts). They are NOT substitutes. For offline/production, self-host the
+   .woff2 binaries and replace these @import lines with local @font-face rules.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap');

@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Color — LiquidOS Glass
+   Light is the product default (:root). Dark is an alternate theme scope.
+   Philosophy: a calm slate-on-white canvas, ONE indigo signature accent, and
+   a small set of pastel "liquid" hues that only ever appear as soft, blurred
+   background blobs or as semantic status colors — never as flat fills.
+   ========================================================================== */
+
+:root {
+  /* ---- Base ramps (Tailwind-derived, the build's literal palette) -------- */
+  --slate-50:  #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  --indigo-50:  #eef2ff;
+  --indigo-100: #e0e7ff;
+  --indigo-300: #a5b4fc;
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;  /* signature accent */
+  --indigo-600: #4f46e5;
+  --indigo-700: #4338ca;
+
+  /* ---- Liquid pastels (background blobs + secondary accents) ------------- */
+  --sky-300:     #7dd3fc;
+  --sky-400:     #38bdf8;
+  --cyan-300:    #67e8f9;
+  --pink-300:    #f9a8d4;
+  --pink-400:    #f472b6;
+  --pink-500:    #ec4899;
+  --rose-200:    #fecdd3;
+  --rose-500:    #f43f5e;
+  --violet-200:  #ddd6fe;
+  --fuchsia-200: #f5d0fe;
+  --emerald-300: #6ee7b7;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --teal-200:    #99f6e4;
+  --amber-100:   #fef3c7;
+  --amber-400:   #fbbf24;
+  --amber-500:   #f59e0b;
+
+  /* ---- Semantic accent -------------------------------------------------- */
+  --accent:          var(--indigo-500);
+  --accent-strong:   var(--indigo-600);
+  --accent-soft:     var(--indigo-400);
+  --accent-wash:     rgba(99, 102, 241, 0.10);  /* tinted chip / icon bg */
+  --accent-ring:     rgba(99, 102, 241, 0.40);  /* focus ring */
+  --accent-grad:     linear-gradient(135deg, #818cf8 0%, #38bdf8 100%); /* @kind other */ /* the logo / hero glow */
+
+  /* ---- Surface / canvas ------------------------------------------------- */
+  --canvas:        #fcfdfe;  /* desktop wallpaper base behind the blobs */
+  --surface-1:     #ffffff;
+  --surface-2:     var(--slate-50);
+  --hairline:      var(--slate-200);
+
+  /* ---- Foreground (text + icon) ----------------------------------------- */
+  --fg-1: var(--slate-800);  /* primary text / headings */
+  --fg-2: var(--slate-500);  /* secondary / body-muted */
+  --fg-3: var(--slate-400);  /* captions / placeholders / inactive icon */
+  --fg-on-accent: #ffffff;
+
+  /* ---- Status (use ONLY for status, never decoration) ------------------- */
+  --ok:        var(--emerald-500);
+  --ok-wash:   rgba(16, 185, 129, 0.10);
+  --warn:      var(--amber-500);
+  --warn-wash: rgba(245, 158, 11, 0.12);
+  --danger:    var(--rose-500);
+  --danger-wash: rgba(244, 63, 94, 0.10);
+  --info:      var(--sky-400);
+  --info-wash: rgba(56, 189, 248, 0.12);
+
+  /* ---- Glass material (alpha over the wallpaper) ------------------------ */
+  --glass-fill:        rgba(255, 255, 255, 0.35);
+  --glass-fill-thin:   rgba(255, 255, 255, 0.45);
+  --glass-fill-thick:  rgba(255, 255, 255, 0.60);
+  --glass-fill-chrome: rgba(255, 255, 255, 0.55);
+  --glass-fill-hover:  rgba(255, 255, 255, 0.55);
+  --glass-rim:         rgba(255, 255, 255, 0.70);  /* border / specular rim */
+  --glass-rim-soft:    rgba(255, 255, 255, 0.55);
+  --glass-sheen:       rgba(255, 255, 255, 0.45);  /* spotlight + lensing */
+  --glass-shadow-rgb:  31, 38, 135;                /* the signature blue-violet glass shadow */
+}
+
+/* ==========================================================================
+   Dark theme — set data-theme="dark" on <html>.
+   The same glass, re-tuned: deep navy canvas, white-alpha glass, brighter
+   foregrounds. Indigo accent stays, lifted one step for contrast.
+   ========================================================================== */
+[data-theme="dark"] {
+  --accent:        var(--indigo-400);
+  --accent-strong: var(--indigo-500);
+  --accent-soft:   var(--indigo-300);
+  --accent-wash:   rgba(129, 140, 248, 0.16);
+  --accent-ring:   rgba(129, 140, 248, 0.45);
+
+  --canvas:     #0b1026;  /* deep navy — the dusk wallpaper base */
+  --surface-1:  #141a33;
+  --surface-2:  #0f1530;
+  --hairline:   rgba(255, 255, 255, 0.10);
+
+  --fg-1: rgba(255, 255, 255, 0.94);
+  --fg-2: rgba(255, 255, 255, 0.64);
+  --fg-3: rgba(255, 255, 255, 0.42);
+
+  --glass-fill:        rgba(255, 255, 255, 0.08);
+  --glass-fill-thin:   rgba(255, 255, 255, 0.06);
+  --glass-fill-thick:  rgba(255, 255, 255, 0.14);
+  --glass-fill-chrome: rgba(20, 26, 51, 0.55);
+  --glass-fill-hover:  rgba(255, 255, 255, 0.14);
+  --glass-rim:         rgba(255, 255, 255, 0.18);
+  --glass-rim-soft:    rgba(255, 255, 255, 0.12);
+  --glass-sheen:       rgba(255, 255, 255, 0.22);
+  --glass-shadow-rgb:  0, 0, 0;
+}

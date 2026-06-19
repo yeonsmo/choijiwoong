@@ -1,0 +1,34 @@
+{
+  "name": "insurance-ad-compliance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "보험광고 법령 위반 검증 및 법령 준수 콘텐츠 생성 웹앱",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "seed": "node --env-file=.env.local scripts/seed-super-admin.mjs",
+    "migrate": "node --env-file=.env.local scripts/migrate.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.69.0",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.48.1",
+    "lucide-react": "^1.18.0",
+    "next": "^15.1.6",
+    "pg": "^8.21.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "eslint": "^9.20.0",
+    "eslint-config-next": "^15.1.6",
+    "typescript": "^5.7.3"
+  }
+}

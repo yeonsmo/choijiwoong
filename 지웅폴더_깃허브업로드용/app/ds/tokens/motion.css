@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Motion — LiquidOS Glass
+   Spring-eased, never linear. Glass content settles like it has mass. Hover
+   brightens + lifts; press recedes slightly then springs back. Honor reduced
+   motion everywhere (cross-fade instead of spring; stop the liquid blobs).
+   ========================================================================== */
+
+:root {
+  --ease-glass:  cubic-bezier(0.32, 0.72, 0, 1);     /* @kind other */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* @kind other */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);     /* @kind other */
+
+  --dur-tap:   160ms;  /* @kind other */
+  --dur-base:  280ms;  /* @kind other */
+  --dur-sheet: 480ms;  /* @kind other */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-tap: 1ms;   /* @kind other */
+    --dur-base: 1ms;  /* @kind other */
+    --dur-sheet: 1ms; /* @kind other */
+  }
+}
