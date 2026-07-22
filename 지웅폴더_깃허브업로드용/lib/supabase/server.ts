@@ -4,18 +4,18 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { getServerEnv } from "@/lib/env";
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./config";
 
 /**
  * 서버 컴포넌트/Route Handler 용 Supabase 클라이언트 (사용자 세션 기반).
  * anon 키 + 쿠키 세션을 사용한다. RLS가 적용되어 로그인한 사용자의 권한만큼만 접근.
  */
 export async function createServerSupabase() {
-  const env = getServerEnv();
   const cookieStore = await cookies();
 
   return createServerClient(
-    env.NEXT_PUBLIC_SUPABASE_URL,
-    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY,
     {
       cookies: {
         getAll() {
@@ -49,7 +49,7 @@ export async function createServerSupabase() {
 export function createServiceRoleSupabase() {
   const env = getServerEnv();
   return createAdminClient(
-    env.NEXT_PUBLIC_SUPABASE_URL,
+    SUPABASE_URL,
     env.SUPABASE_SERVICE_ROLE_KEY,
     {
       auth: { autoRefreshToken: false, persistSession: false },
