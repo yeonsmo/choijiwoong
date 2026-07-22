@@ -10,6 +10,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "seed": "node --env-file=.env.local scripts/seed-super-admin.mjs",
+    "reset-admin": "node --env-file=.env.local scripts/reset-super-admin-password.mjs",
     "migrate": "node --env-file=.env.local scripts/migrate.mjs"
   },
   "dependencies": {
